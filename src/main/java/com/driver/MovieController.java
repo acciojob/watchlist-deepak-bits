@@ -16,20 +16,20 @@ public class MovieController {
 
     @PostMapping("/add-movie")
     public ResponseEntity<String> addMovie(@RequestBody Movie movie) {
-        movieService.addMovie(movie);
-        return new ResponseEntity<>("New movie added successfully", HttpStatus.CREATED);
+        String res = movieService.addMovie(movie);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @PostMapping("/add-director")
     public ResponseEntity<String> addDirector(@RequestBody Director director) {
-        movieService.addDirector(director);
-        return new ResponseEntity<>("New director added successfully", HttpStatus.CREATED);
+        String res = movieService.addDirector(director);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @PutMapping("/add-movie-director-pair")
     public ResponseEntity<String> addMovieDirectorPair(@RequestParam("movie") String movie, @RequestParam("director") String director) {
-        movieService.addMovieDirectorPair(movie, director);
-        return new ResponseEntity<>("New movie-director pair added successfully", HttpStatus.CREATED);
+        String res = movieService.addMovieDirectorPair(movie, director);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @GetMapping("/get-movie-by-name/{name}")

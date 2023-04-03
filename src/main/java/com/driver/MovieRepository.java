@@ -13,16 +13,19 @@ public class MovieRepository {
     HashMap<String, Director> directorDB = new HashMap<>();
     HashMap<String, String> movieDirectorPair = new HashMap<>(); // key: movieName, value: directorName
 
-    public void addMovie(Movie movie) {
+    public String addMovie(Movie movie) {
         movieDB.put(movie.getName(), movie);
+        return "New movie added successfully";
     }
 
-    public void addDirector(Director director) {
+    public String addDirector(Director director) {
         directorDB.put(director.getName(), director);
+        return "New director added successfully";
     }
 
-    public void addMovieDirectorPair(String movie, String director) {
+    public String addMovieDirectorPair(String movie, String director) {
         movieDirectorPair.put(movie, director);
+        return "New movie-director pair added successfully";
     }
 
     public Movie getMovieByName(String name) {
@@ -58,11 +61,14 @@ public class MovieRepository {
     }
 
     public void deleteAllDirectors() {
-        directorDB.clear();
-//        List<String> movies = new ArrayList<>();
-        for(String movieName : movieDirectorPair.keySet()) {
-            movieDB.remove(movieName);
-            movieDirectorPair.remove(movieName);
+        for(String directorName : directorDB.keySet()) {
+            directorDB.remove(directorName);
+            for(String movieName : movieDirectorPair.keySet()) {
+                if(movieDirectorPair.get(movieName).equals(directorName)) {
+                    movieDB.remove(movieName);
+                    movieDirectorPair.remove(movieName);
+                }
+            }
         }
     }
 }
